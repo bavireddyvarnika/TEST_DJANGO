@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import homePageView
+from .views import add_numbers
+
 urlpatterns = [
-    path('', homePageView),
+    path("", add_numbers, name="add_numbers"),   # homepage shows the form
 ]
