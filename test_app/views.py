@@ -1,13 +1,17 @@
+from django.http import JsonResponse
 from django.shortcuts import render
-from .forms import AdditionForm
 
-def add_numbers(request):
-    result = None
-    form = AdditionForm(request.POST or None)
+def add_page(request):
+    # Renders the page with inputs (no Django form)
+    return render(request, "add.html")
 
-    if request.method == "POST" and form.is_valid():
-        a = form.cleaned_data["a"]
-        b = form.cleaned_data["b"]
-        result = a + b
+def add_numbers_api(request):
+    print("request:",request)
+    # API endpoint that returns JSON (no HTML form)
+    try:
+        a = int(request.GET.get("a", ""))
+        b = int(request.GET.get("b", ""))
+    except ValueError:
+        return JsonResponse({"ok": False, "error": "Please provide valid integers for a and b."}, status=400)
 
-    return render(request, "add.html", {"form": form, "result": result})
+    return JsonResponse({"ok": True, "a": a, "b": b, "result": a + b})

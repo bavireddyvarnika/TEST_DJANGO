@@ -5,16 +5,30 @@
   <title>Add Two Numbers</title>
 </head>
 <body>
-  <h1>Add  Numbers</h1>
+  <h1>Add Two Numbers</h1>
 
-  <form method="post" action="{% url 'add_numbers' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Add</button>
-  </form>
+  <input id="a" type="number" placeholder="Enter first number">
+  <input id="b" type="number" placeholder="Enter second number">
+  <button onclick="addNumbers()">Add</button>
 
-  {% if result is not None %}
-    <p><strong>Result:</strong> {{ result }}</p>
-  {% endif %}
+  <p id="result"></p>
+
+  <script>
+    function addNumbers() {
+      const a = document.getElementById("a").value;
+      const b = document.getElementById("b").value;
+
+      fetch(`/add-api/?a=${a}&b=${b}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.ok) {
+            document.getElementById("result").innerText =
+              `${data.a} + ${data.b} = ${data.result}`;
+          } else {
+            document.getElementById("result").innerText = data.error;
+          }
+        });
+    }
+  </script>
 </body>
 </html>

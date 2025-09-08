@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import add_numbers
+from . import views
 
 urlpatterns = [
-    path("", add_numbers, name="add_numbers"),   # homepage shows the form
+    path("", views.add_page, name="add_page"),          # renders the UI
+    path("add-api/", views.add_numbers_api, name="add_numbers_api"),  # JSON API
 ]
