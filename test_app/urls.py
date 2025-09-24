@@ -1,7 +1,7 @@
 from django.urls import path
-from . import views
+from .views import hello_world
 
 urlpatterns = [
-    path("", views.add_page, name="add_page"),          # renders the UI
-    path("add-api/", views.add_numbers_api, name="add_numbers_api"),  # JSON API
+    # path('hello/', hello_world),
+    path('', hello_world),   
 ]

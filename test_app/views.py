@@ -1,17 +1,16 @@
-from django.http import JsonResponse
-from django.shortcuts import render
+# from rest_framework.decorators import api_view
+# from rest_framework.response import Response
 
-def add_page(request):
-    # Renders the page with inputs (no Django form)
-    return render(request, "add.html")
+# @api_view(["GET"])
+# def hello_world(request):
+#     return Response({"Hello World"})
+from django.http import HttpResponse
 
-def add_numbers_api(request):
-    print("request:",request)
-    # API endpoint that returns JSON (no HTML form)
-    try:
-        a = int(request.GET.get("a", ""))
-        b = int(request.GET.get("b", ""))
-    except ValueError:
-        return JsonResponse({"ok": False, "error": "Please provide valid integers for a and b."}, status=400)
-
-    return JsonResponse({"ok": True, "a": a, "b": b, "result": a + b})
+def hello_world(request):
+    if request.method == "GET":
+        # manually return JSON string
+        return HttpResponse('{"message": "Hello World"}', content_type="application/json")
+                            
+    else:
+        # if not GET, return 405
+        return HttpResponse("Method Not Allowed", status=405)

@@ -27,10 +27,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',   # Only JSON
+    ]
+}
 
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'test_app.apps.TestAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
