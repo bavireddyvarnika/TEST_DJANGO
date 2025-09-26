@@ -1,34 +1,13 @@
 <!-- <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Add Two Numbers</title>
+    <title>Hello POST</title>
 </head>
 <body>
-  <h1>Add Two Numbers</h1>
-
-  <input id="a" type="number" placeholder="Enter first number">
-  <input id="b" type="number" placeholder="Enter second number">
-  <button onclick="addNumbers()">Add</button>
-
-  <p id="result"></p>
-
-  <script>
-    function addNumbers() {
-      const a = document.getElementById("a").value;
-      const b = document.getElementById("b").value;
-
-      fetch(`/add-api/?a=${a}&b=${b}`)
-        .then(response => response.json())
-        .then(data => {
-          if (data.ok) {
-            document.getElementById("result").innerText =
-              `${data.a} + ${data.b} = ${data.result}`;
-          } else {
-            document.getElementById("result").innerText = data.error;
-          }
-        });
-    }
-  </script>
+    <h2>Send POST with CSRF</h2>
+    <form action="/hello-post/" method="POST">
+        {% csrf_token %}
+        <button type="submit">Send POST</button>
+    </form>
 </body>
 </html> -->
